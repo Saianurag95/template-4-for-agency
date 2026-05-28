@@ -7,9 +7,10 @@ import {
   Link as LinkIcon,
   ArrowRight,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { SERVICES } from "../data/siteData";
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   Search,
   MapPin,
   FileText,
