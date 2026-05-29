@@ -5,6 +5,10 @@ import IntakePage from "./pages/IntakePage";
 import ScrollReveal from "./components/ScrollReveal";
 
 export default function App() {
+  if (window.location.hash === "#payment-confirmation") {
+    return <PaymentConfirmation />;
+  }
+
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollReveal />
