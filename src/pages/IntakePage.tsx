@@ -18,6 +18,7 @@ import {
   ClipboardCheck,
 } from "lucide-react";
 import { PACKAGES, TEMPLATE_IDS } from "../data/siteData";
+import { submitIntakeWithRazorpay } from "../payments/razorpay";
 
 const STEPS = [
   { id: 1, label: "Business", icon: Building },
@@ -734,7 +735,19 @@ export default function IntakePage() {
   const tryNext = () => {
     if (!canContinue) { setShowWarning(true); return; }
     setShowWarning(false);
-    if (step === 11) { setSubmitted(true); } else { setStep((s) => s + 1); }
+    if (step === 11) {
+      const selectedPkg = PACKAGES.find((pkg) => pkg.id === form.selectedPackage);
+      submitIntakeWithRazorpay({
+        templateId: form.selectedTemplateId || "AG-SEO-04",
+        formData: form as unknown as Record<string, unknown>,
+        packageName: selectedPkg?.name || form.selectedPackage || "Starter",
+        packagePrice: selectedPkg?.price,
+        customerName: form.ownerName,
+        customerEmail: form.email,
+        customerPhone: form.phone,
+        businessName: form.businessName,
+      }).catch(() => setSubmitted(true));
+    } else { setStep((s) => s + 1); }
   };
 
   const goBack = () => {
@@ -870,7 +883,7 @@ export default function IntakePage() {
                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
             }`}
           >
-            {step === 11 ? "Submit Project" : "Save and Continue"}
+            {step === 11 ? "Pay with Razorpay" : "Save and Continue"}
             {step !== 11 && (
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
             )}
