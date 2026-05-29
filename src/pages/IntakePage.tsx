@@ -589,6 +589,7 @@ function StepContent({
                     {sel && <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />}
                   </div>
                   <div className={`text-[28px] font-black mb-1 ${sel ? "text-blue-700" : "text-gray-900"}`}>{pkg.price}</div>
+                  {"hostingPrice" in pkg && <div className="text-xs font-bold text-blue-600 mb-2">{pkg.hostingPrice}</div>}
                   <div className="text-xs text-gray-500 mb-4">{pkg.pages} pages · {pkg.delivery}</div>
                   <ul className="space-y-1.5">
                     {pkg.features.map((f) => (
@@ -603,7 +604,7 @@ function StepContent({
             })}
           </div>
           <p className="text-gray-400 text-xs mt-4">
-            Demo pricing only. All prices in Indian Rupees (₹). Final pricing confirmed in writing after scope review.
+            Demo pricing only. All prices in Indian Rupees (₹). Add ₹500 to ₹900 if we arrange domain and hosting.
           </p>
         </div>
       );
@@ -613,16 +614,14 @@ function StepContent({
         <div>
           <SectionHead
             title="Payment"
-            subtitle="Select your preferred payment method and confirm the milestone arrangement."
+            subtitle="Payment is online-only through Razorpay after intake submission."
           />
           <div className="space-y-6">
             <div>
               <FLabel required>Payment method</FLabel>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
-                  ["Bank Transfer (NEFT / IMPS / UPI)", "bank"],
-                  ["UPI / PhonePe / Google Pay", "upi"],
-                  ["Cash (in-person, Hyderabad)", "cash"],
+                  ["Razorpay online payment", "razorpay"],
                 ].map(([label, val]) => (
                   <FCard key={val} label={label} selected={form.paymentMethod === val} onClick={() => set("paymentMethod", val)} />
                 ))}
@@ -632,25 +631,25 @@ function StepContent({
               <FLabel required>Payment confirmation</FLabel>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <FCard
-                  label="I agree to the demo pricing and milestone structure"
-                  description="50% advance, 50% on delivery"
+                  label="I agree to online payment through Razorpay"
+                  description="Full payment after intake submission"
                   selected={form.paymentConfirmed === "agreed"}
                   onClick={() => set("paymentConfirmed", "agreed")}
                 />
                 <FCard
-                  label="I want to discuss payment terms first"
-                  description="We will confirm terms before starting"
+                  label="I understand only Razorpay online payment is accepted"
+                  description="Payment must be completed online"
                   selected={form.paymentConfirmed === "discuss"}
                   onClick={() => set("paymentConfirmed", "discuss")}
                 />
               </div>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
-              <div className="text-blue-900 font-bold text-sm mb-2">Payment milestone structure</div>
+              <div className="text-blue-900 font-bold text-sm mb-2">Online payment structure</div>
               <div className="text-blue-700 text-[14px]">
-                <strong>50%</strong> advance before production starts.
+                <strong>100%</strong> online payment is collected through Razorpay after intake submission.
                 <br />
-                <strong>50%</strong> on delivery before final files are transferred.
+                Domain and hosting add-on is <strong>₹500 to ₹900</strong> only when we arrange it.
               </div>
             </div>
           </div>

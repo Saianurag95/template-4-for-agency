@@ -62,6 +62,11 @@ export default function Packages() {
                     <div className={`text-[13px] mt-2 font-medium ${featured ? "text-blue-400" : "text-gray-400"}`}>
                       {pkg.pages} pages · Delivered in {pkg.delivery}
                     </div>
+                    {"hostingPrice" in pkg && (
+                      <div className={`text-[12px] mt-2 font-bold ${featured ? "text-blue-200" : "text-blue-600"}`}>
+                        {pkg.hostingPrice}
+                      </div>
+                    )}
                   </div>
 
                   <ul className="space-y-3 mb-8 flex-1">
@@ -99,7 +104,7 @@ export default function Packages() {
         </div>
 
         <p className="text-center text-gray-400 text-[12px] mt-8">
-          Demo pricing shown. All prices in Indian Rupees. Confirmed in writing after scope review.
+          Demo pricing shown. Add ₹500 to ₹900 if we arrange domain and hosting. Payment is online-only.
         </p>
       </div>
     </section>
